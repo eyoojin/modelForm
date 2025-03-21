@@ -1,4 +1,5 @@
 # 0. setting
+### ---commit(.gitignore 설정)---
 
 - 가상환경 생성 / 활성화
 
@@ -6,15 +7,22 @@
 
 - .gitignore 설정
 
----commit---
+### ---commit(startproject / startapp)---
 
 # 1. Django
 
 - startproject
-
 - startapp / 등록
+```shell
+django-admin startproject modelForm .
+django-admin startapp articles
+```
+```python
+# setting.py
+INSTALLED_APPS = ['articles']
+```
 
----commit---
+### ---commit(modeling / migration)---
 
 - modeling
 ```python
@@ -32,9 +40,9 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
----commit---
+### ---commit(admin에 Article 추가)---
 
-- admin 등록
+- admin에 Article 추가
 ```python
 # admin.py
 from .models import Article
@@ -42,7 +50,7 @@ from .models import Article
 admin.stie.register(Article)
 ```
 
----commit---
+### ---commit(공통 base.html 설정)---
 
 - createsuperuser
 ```shell
@@ -55,6 +63,7 @@ python manage.py createsuperuser
 TEMPLATES = [{ 'DIRS': [BASE_DIR / 'templates']}]
 ```
 ```html
+<!-- base.html -->
 <body>
     <h1>base</h1>
     {% block body %}
@@ -62,7 +71,7 @@ TEMPLATES = [{ 'DIRS': [BASE_DIR / 'templates']}]
 </body>
 ```
 
----commit---
+### ---commit(Read(All) 기능 구현)---
 
 - url
 ```python
@@ -112,10 +121,11 @@ def index(request):
 {% endblock %}
 ```
 
----commit---
+### ---commit(Create(Ver.1) 기능 구현)---
 
 - articles/'forms.py'
 ```python
+# forms.py
 from django.forms import ModelForm
 from .models import Article
 
@@ -172,27 +182,27 @@ def create(request):
 # views.py
 from django.shortcuts import redirect
 
-if request.method == 'POST':
+    if request.method == 'POST':
     form = ArticleForm(request.POST)
     # request.POST: dictionary
     # 내가 만든 폼에 사용자가 입력한 데이터를 넣어줌
 
-    if form.is_valid():
-    # 폼에 있는 데이터가 유효한가요?
-        form.save()
-        return redirect('articles:index')            
-    else:
-        pass
+        if form.is_valid():
+        # 폼에 있는 데이터가 유효한가요?
+            form.save()
+            return redirect('articles:index')            
+        else:
+            pass
 ```
 ```python
-    else:
-        context = {
-            'form': form,
-        }
-        return render(request, 'create.html', context)
+        else:
+            context = {
+                'form': form,
+            }
+            return render(request, 'create.html', context)
 ```
 
----commit---
+### ---commit(Create(Ver.2) 기능 구현)---
 
 ```python
     # else:
@@ -239,7 +249,7 @@ def create(request):
         # 2. 비어있는 form을 만든다
         form = ArticleForm()
 
-    # 3. context dict에 비어있는  form을 담는다
+    # 3. context dict에 비어있는 form을 담는다
     # 8. context dict에 실패한 form을 담는다
     context = {
         'form': form,
