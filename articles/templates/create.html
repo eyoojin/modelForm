@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+
+{% block body %}
+<!-- action 비워두면 현재 위치로 요청을 보냄 -->
+<form action="" method="POST">
+    {% csrf_token%}
+    {{form}}
+    <input type="submit" value="Send">
+</form>
+{% endblock %}

@@ -4,5 +4,6 @@ app_name = 'articles'
 
 urlpatterns = [
     # Read
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('create/', views.create, name='create'),
 ]
