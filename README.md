@@ -193,3 +193,59 @@ if request.method == 'POST':
 ```
 
 ---commit---
+
+```python
+    # else:
+    #     pass
+    # 쓸모 없는 코드이기 때문에 삭제
+else:
+    form = ArticleForm()
+    
+context = {
+    'form': form,
+}
+
+return render(request, 'create.html', context)
+```
+```python
+# 흐름
+def create(request):    
+    # 모든 경우의 수
+    # - GET: form을 만들어서 html문서를 사용자에게 리턴
+    # - POST: invalid data (데이터 검증 실패)
+    # - POST: valid data (데이터 검증 성공)
+
+    # 5. POST 요청 (invalid data)
+    # 10. POST요청 (valid data)
+    if request.method == 'POST':
+
+        # 6. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (invalid)
+        # 7. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (vaild)
+        form = ArticleForm(request.POST)
+
+        # 7. form을 검증 -> 실패
+        # 12. form을 검증 -> 성공
+        if form.is_valid():
+
+            # 13. form 저장
+            form.save()
+
+            # 14. index로 redirect
+            return redirect('articles:index')
+    
+    # 1. GET 요청
+    else:
+        
+        # 2. 비어있는 form을 만든다
+        form = ArticleForm()
+
+    # 3. context dict에 비어있는  form을 담는다
+    # 8. context dict에 실패한 form을 담는다
+    context = {
+        'form': form,
+    }
+
+    # 4. create.html을 렌더링
+    # 9. create.html을 렌더링
+    return render(request, 'create.html', context)
+```
