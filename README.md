@@ -52,6 +52,45 @@ python manage.py createsuperuser
 ```python
 TEMPLATES = [{ 'DIRS': [BASE_DIR / 'templates']}]
 ```
+```html
+<body>
+    <h1>base</h1>
+    {% block body %}
+    {% end block %}
+</body>
+```
+
+- url
+```python
+from django.urls import path, include
+
+urlpatterns = [path('articles/', include('articles.urls'))]
+```
+```python
+from django.urls import path
+
+app_name = 'articles'
+
+urlpatterns = []
+```
+
+- Read
+```python
+from . import views
+path('', views.index, name='index')
+```
+```python
+from .models import Article
+
+def index(request):
+    articles = Article.objects.all()
+
+    context = {
+        'articles': articles,
+    }
+    
+    return render(request, 'index.html')
+```
 
 
 
