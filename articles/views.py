@@ -29,7 +29,7 @@ def create(request):
     # 10. POST요청 (valid data)
     if request.method == 'POST':
         # 6. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (invalid)
-        # 7. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (vaild)
+        # 11. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (vaild)
         form = ArticleForm(request.POST)
         # request.POST: dictionary
         # 내가 만든 폼에 사용자가 입력한 데이터를 넣어줌
@@ -48,7 +48,7 @@ def create(request):
         # 2. 비어있는 form을 만든다
         form = ArticleForm()
 
-    # 3. context dict에 비어있는  form을 담는다
+    # 3. context dict에 비어있는 form을 담는다
     # 8. context dict에 실패한 form을 담는다
     context = {
         'form': form,

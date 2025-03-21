@@ -220,7 +220,7 @@ def create(request):
     if request.method == 'POST':
 
         # 6. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (invalid)
-        # 7. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (vaild)
+        # 11. 사용자가 입력한 데이터(request.POST)를 담은 form 생성 (vaild)
         form = ArticleForm(request.POST)
 
         # 7. form을 검증 -> 실패
@@ -235,7 +235,7 @@ def create(request):
     
     # 1. GET 요청
     else:
-        
+
         # 2. 비어있는 form을 만든다
         form = ArticleForm()
 
